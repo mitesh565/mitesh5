@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro" >
+
+    <gazebo reference="base_link" >
+        <material>Gazebo/Red</material> 
+    </gazebo>
+
+    <gazebo reference="base_footprint" >
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="diff_drive_controller_back" filename="libgazebo_ros_diff_drive.so">
+            
+            <!-- Update rate in Hz -->
+            <update_rate>50</update_rate>
+
+            <!-- wheels -->
+            <left_joint>base_back_left_wheel_joint</left_joint>
+            <right_joint>base_back_right_wheel_joint</right_joint>
+
+            <!-- kinematics -->
+            <wheel_separation>0.45</wheel_separation>
+            <wheel_diameter>0.2</wheel_diameter>
+
+            <!-- limits -->
+            <max_wheel_torque>20</max_wheel_torque>
+            <max_wheel_acceleration>1.0</max_wheel_acceleration>
+
+            <!-- input
+            <command_topic>cmd_vel</command_topic> -->
+
+            <!-- output -->
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+
+            <odometry_topic>odom</odometry_topic>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+
+        </plugin>
+
+        <plugin name="diff_drive_controller_front" filename="libgazebo_ros_diff_drive.so">
+            
+            <!-- Update rate in Hz -->
+            <update_rate>50</update_rate>
+
+            <!-- wheels -->
+            <left_joint>base_front_left_wheel_joint</left_joint>
+            <right_joint>base_front_right_wheel_joint</right_joint>
+
+            <!-- kinematics -->
+            <wheel_separation>0.45</wheel_separation>
+            <wheel_diameter>0.2</wheel_diameter>
+
+            <!-- limits -->
+            <max_wheel_torque>20</max_wheel_torque>
+            <max_wheel_acceleration>1.0</max_wheel_acceleration>
+
+            <!-- input
+            <command_topic>cmd_vel</command_topic> -->
+
+            <!-- output -->
+            <publish_odom>true</publish_odom>
+            <publish_odom_tf>true</publish_odom_tf>
+            <publish_wheel_tf>true</publish_wheel_tf>
+
+            <odometry_topic>odom</odometry_topic>
+            <odometry_frame>odom</odometry_frame>
+            <robot_base_frame>base_footprint</robot_base_frame>
+
+        </plugin>
+
+        <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
+            <baseline>0.2</baseline>
+            <alwaysOn>true</alwaysOn>
+            <!-- Keep this zero, update_rate in the parent <sensor> tag
+              will control the frame rate. -->
+            <updateRate>0.0</updateRate>
+            <cameraName>camera_sensor</cameraName>
+            <imageTopicName>/camera/color/image_raw</imageTopicName>
+            <cameraInfoTopicName>/camera/color/camera_info</cameraInfoTopicName>
+            <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+            <depthImageCameraInfoTopicName>/camera/depth/camera_info</depthImageCameraInfoTopicName>
+            <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+            <frameName>camera_link</frameName>
+            <pointCloudCutoff>0.5</pointCloudCutoff>
+            <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+            <distortionK1>0</distortionK1>
+            <distortionK2>0</distortionK2>
+            <distortionK3>0</distortionK3>
+            <distortionT1>0</distortionT1>
+            <distortionT2>0</distortionT2>
+            <CxPrime>0</CxPrime>
+            <Cx>0</Cx>  
+            <Cy>0</Cy>
+            <focalLength>0</focalLength>
+            <hackBaseline>0</hackBaseline>
+          </plugin>
+
+        
+    </gazebo>
+
+
+
+
+</robot>
